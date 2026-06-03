@@ -1,101 +1,100 @@
 "use client"
-import React, { useState, useEffect } from "react"
-import Script from "next/script"
-import { useSession } from "next-auth/react"
-import { useSearchParams, useRouter } from "next/navigation"
-import { ToastContainer, toast } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
-
-import { initiate, fetchuser, fetchpayments } from "../../actions/useractions"
+import React, { useState, useEffect } from 'react'
+import Script from 'next/script'
+import { initiate, fetchuser, fetchpayments } from '../../actions/useractions'
+import { useSession } from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
+import { ToastContainer, toast, Bounce } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from 'next/navigation'
 
 const Paymentpage = ({ username }) => {
     const { data: session } = useSession()
-    const router = useRouter()
-    const searchParams = useSearchParams()
 
-    const [paymentform, setpaymentform] = useState({
-        name: "",
-        message: "",
-        amount: ""
-    })
-
-    const [currentuser, setcurrentuser] = useState(null)
+    const [paymentform, setpaymentform] = useState({ name: "", message: "", amount: "" })
+    const [currentuser, setcurrentuser] = useState({})
     const [Payments, setPayments] = useState([])
     const [razorLoaded, setRazorLoaded] = useState(false)
 
+    const SearchParams = useSearchParams()
+    const router = useRouter()
+
     useEffect(() => {
-        const getData = async () => {
-            try {
-                const u = await fetchuser(username)
-                const p = await fetchpayments(username)
-
-                setcurrentuser(u || null)
-                setPayments(p || [])
-            } catch (err) {
-                console.log(err)
-            }
-        }
-
         getData()
-    }, [username])
+    }, [])
+
+    const handleChange = (e) => {
+        setpaymentform({ ...paymentform, [e.target.name]: e.target.value })
+    }
+
+    const getData = async () => {
+        let u = await fetchuser(username)
+        if (u) setcurrentuser(u)
+
+        let dbpayments = await fetchpayments(username)
+        if (dbpayments) setPayments(dbpayments)
+    }
 
     useEffect(() => {
-        if (searchParams.get("paymentdone") === "true") {
-            toast.success("Payment successful!")
+        if (SearchParams.get("paymentdone") == "true" && session) {
+            toast.success('Payment has been made.');
             router.push(`/${username}`)
         }
     }, [session])
 
-    const handleChange = (e) => {
-        setpaymentform({
-            ...paymentform,
-            [e.target.name]: e.target.value
-        })
-    }
+    const pay = async (amount) => {
 
-    const pay = async () => {
-        try {
-            const amt = Number(paymentform.amount) * 100
-
-            if (!amt || amt <= 0) {
-                alert("Invalid amount")
-                return
-            }
-
-            if (!razorLoaded || !window.Razorpay) {
-                alert("Razorpay not loaded")
-                return
-            }
-
-            const order = await initiate(amt, username, paymentform)
-
-            if (!order?.id) {
-                alert("Order creation failed")
-                return
-            }
-
-            const options = {
-                key: currentuser?.razorpayid,
-                amount: amt,
-                currency: "INR",
-                name: "Get Me A Mango",
-                description: "Payment",
-                order_id: order.id,
-                callback_url: "https://get-me-a-mango.vercel.app/api/razorpay"
-            }
-
-            const rzp = new window.Razorpay(options)
-            rzp.open()
-
-        } catch (err) {
-            console.log(err)
-            alert("Payment failed")
+        if (!razorLoaded || !window.Razorpay) {
+            alert("Razorpay not loaded");
+            return;
         }
+
+        let a = await initiate(amount, username, paymentform)
+
+        if (!a?.id) {
+            alert("Order creation failed");
+            return;
+        }
+
+        var options = {
+            key: currentuser?.razorpayid,
+            amount: amount,
+            currency: "INR",
+            name: "Get me a Mongo",
+            description: "Test Transaction",
+            image: "https://i.pinimg.com/originals/8e/cb/5b/8ecb5bda69e29eb348a04ad66077fac6.gif",
+            order_id: a.id,
+            callback_url: "https://get-me-a-mango.vercel.app/api/razorpay",
+            prefill: {
+                name: "Gaurav Kumar",
+                email: "gaurav.kumar@example.com",
+                contact: "+919876543210"
+            },
+            notes: {
+                address: "Razorpay Corporate Office"
+            },
+            theme: {
+                color: "#3399cc"
+            },
+            method: {
+                upi: true,
+                card: true,
+                netbanking: true
+            }
+        }
+
+        var rzp1 = new window.Razorpay(options);
+        rzp1.open();
     }
 
     return (
         <>
-            <ToastContainer />
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                theme="dark"
+                transition={Bounce}
+            />
 
             <Script
                 src="https://checkout.razorpay.com/v1/checkout.js"
@@ -103,53 +102,69 @@ const Paymentpage = ({ username }) => {
                 onLoad={() => setRazorLoaded(true)}
             />
 
-            <div className="payments">
+            <div className='cover  relative'>
+                <img className=' w-full lg:h-[25vw] sm:h-[40vw] h-[60vw]  object-cover' src={currentuser?.coverpic} />
+                <div className="cover-pic absolute bottom-[-80px] left-1/2 -translate-x-1/2">
+                    <img
+                        className={`h-44 w-44 object-cover rounded-full border-2 border-blue-950`}
+                        src={currentuser?.profilepic}
+                        alt=""
+                    />
+                </div>
+            </div>
 
-                <h2 className="text-xl font-bold">@{username}</h2>
+            <div className="info flex justify-center flex-col items-center my-20 gap-1.5">
+                <div className="flex items-center">
+                    <h2 className='font-bold text-2xl'>@{username}</h2>
+                    {username === "arisepawan" && (<svg className='flex mt-1 ml-1 ' aria-label="Verified" fill="rgb(0, 149, 246)" height="18" width="18"><path d="M19.998 3.094..." /></svg>)}
+                </div>
 
-                <p className="text-gray-400">
-                    Total Payments: {Payments.length}
+                <p className='text-slate-400'>{currentuser?.bio}</p>
+
+                <p className='text-slate-400'>
+                    {Payments.length}
+                    {Payments.length > 9 ? "+" : ""}
+                    {Payments.length > 1 ? "Funds" : "Fund"} • ₹
+                    {(Payments || []).reduce((a, b) => a + (b.amount || 0), 0) / 100}
+                    {" "}raised
                 </p>
 
-                <p className="text-gray-400">
-                    ₹{(Payments || []).reduce((a, b) => a + (b.amount || 0), 0) / 100} raised
-                </p>
+                <div className="payments flex flex-col xl:flex-row gap-5  w-[80%] mt-6 ">
 
-                <div className="form flex flex-col gap-3 mt-5">
+                    <div className="supporters xl:w-1/2 w-full flex flex-col items-center bg-slate-900 px-5 py-8 rounded-lg ">
+                        <h2 className='text-white font-bold text-xl text-center mb-3 '>Supporters (Latest 10)</h2>
 
-                    <input
-                        name="name"
-                        placeholder="Name"
-                        onChange={handleChange}
-                        className="p-2 border"
-                    />
+                        <ul>
+                            {Payments.length == 0 && <li>No Payments yet.</li>}
 
-                    <input
-                        name="message"
-                        placeholder="Message"
-                        onChange={handleChange}
-                        className="p-2 border"
-                    />
+                            {Payments.map((p) => (
+                                <li key={p._id} className="text-gray-200 mb-4 flex">
+                                    <img className="h-6 w-6 mx-1 invert" src="/profile.png" />
+                                    {p.name} donated ₹{p.amount / 100} "{p.message}"
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                    <input
-                        name="amount"
-                        type="number"
-                        placeholder="Amount"
-                        onChange={handleChange}
-                        className="p-2 border"
-                    />
+                    <div className="supporters bg-slate-900 px-5 py-8 rounded-lg xl:w-1/2 w-full">
+                        <h2 className='text-white font-bold text-xl text-center mb-3'>Make a Payment</h2>
 
-                    <button
-                        onClick={pay}
-                        disabled={
-                            !paymentform.name ||
-                            !paymentform.message ||
-                            !paymentform.amount
-                        }
-                        className="bg-green-500 p-2 text-white"
-                    >
-                        Pay
-                    </button>
+                        <div className="pay flex flex-col gap-4 text-white mb-4">
+
+                            <input onChange={handleChange} name='name' className='w-full bg-slate-800 p-3 rounded-lg' placeholder='Enter Your Name' />
+                            <input onChange={handleChange} name='message' className='w-full bg-slate-800 p-3 rounded-lg' placeholder='Enter Your Message' />
+                            <input onChange={handleChange} name='amount' type="number" className='w-full bg-slate-800 p-3 rounded-lg' placeholder='Enter Amount' />
+
+                            <button
+                                onClick={() => pay(Number(paymentform.amount) * 100)}
+                                disabled={paymentform.name?.length < 3 || paymentform.message?.length < 3 || paymentform.amount <= 0}
+                                className='bg-green-500 p-3 rounded-lg text-black font-bold'
+                            >
+                                Pay
+                            </button>
+
+                        </div>
+                    </div>
 
                 </div>
             </div>
