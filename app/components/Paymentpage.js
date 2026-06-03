@@ -116,7 +116,11 @@ const Paymentpage = ({ username }) => {
             <div className="info flex justify-center flex-col items-center my-20 gap-1.5">
                 <div className="flex items-center">
                     <h2 className='font-bold text-2xl'>@{username}</h2>
-                    {username === "arisepawan" && (<svg className='flex mt-1 ml-1 ' aria-label="Verified" fill="rgb(0, 149, 246)" height="18" width="18"><path d="M19.998 3.094..." /></svg>)}
+                    {username?.trim().toLowerCase() === "arisepawan" && (
+  <svg className="flex mt-1 ml-1" aria-label="Verified" fill="rgb(0, 149, 246)" height="18" width="18">
+    <path d="M19.998 3.094..." />
+  </svg>
+)}
                 </div>
 
                 <p className='text-slate-400'>{currentuser?.bio}</p>
