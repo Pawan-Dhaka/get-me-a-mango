@@ -31,7 +31,7 @@ export const POST = async (req) => {
     );
     if (xx) {
         const updatePayment = await Payment.findOneAndUpdate({ oid: body.razorpay_order_id }, { done: "true" }, { new: true }).lean()
-        const url = new URL(request.url)
+        const url = new URL(req.url)
 
 return NextResponse.redirect(
   `${url.origin}/${updatePayment.to_user}?paymentdone=true`
