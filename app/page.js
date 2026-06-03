@@ -1,65 +1,88 @@
-import Image from "next/image";
+'use client';
+import Script from 'next/script';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <div className=" flex justify-center flex-col gap-5 items-center text-white h-[40vh] ">
+        <div className="font-bold min-[500px]:text-5xl text-3xl flex items-center ">Buy me a Mango<span className="min-[500px]:w-20 w-12" ><img src="https://i.pinimg.com/originals/8e/cb/5b/8ecb5bda69e29eb348a04ad66077fac6.gif" alt="tea" /></span></div>
+        <p className='text-center px-2'>Get money to buy some Mongos by your followers and well wishers.</p>
+        <div className="button flex gap-5">
+          <Link href={"/login"}>
+          <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl hover:ring-1 hover:ring-gray-700 font-medium rounded-xl text-sm px-4 py-2.5 text-center leading-5">Get Started</button>
+          </Link>
+          <Link href={"/arisepawan"}>
+          <button type="button" className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl hover:ring-1 hover:ring-gray-700 font-medium rounded-xl text-sm px-4 py-2.5 text-center leading-5">Support Us ❤️</button>
+          </Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </div>
+      <div className="bg-white h-[1px] opacity-15">.</div>
+      <div className="text-white container mx-auto py-16 ">
+        <h2 className="text-2xl font-extrabold mb-8 text-center">
+          Your fans can buy tea for you
+        </h2>
+        <div className="flex justify-around">
+          <div className="space-y-2 flex flex-col justify-center items-center">
+            <img className="w-[110px] item bg-slate-400 rounded-full p-2" src="/man.gif" alt="" />
+            <p className="text-white font-bold text-xl text-center">Fund Yourself</p>
+            <p className="text-white font-semibold text-lg hidden lg:flex">Your fans are willing to help you.</p>
+          </div>
+          <div className="space-y-2 flex flex-col justify-center items-center ">
+            <img className="w-[110px] item bg-slate-400 rounded-full p-2" src="/coin.gif" alt="" />
+            <p className="text-white font-bold text-xl text-center">Fans want to help</p>
+            <p className="text-white font-semibold text-lg hidden lg:flex">Your fans are willing to help you.</p>
+          </div>
+          <div className="space-y-2  flex-col justify-center items-center hidden min-[500px]:flex">
+            <img className="w-[110px] item bg-slate-400 rounded-full p-2" src="/group.gif" alt="" />
+            <p className="text-white font-bold text-xl text-center">Fans want to help</p>
+            <p className="text-white font-semibold text-lg hidden lg:flex">Your fans are willing to help you.</p>
+          </div>
         </div>
-      </main>
-    </div>
+      </div> 
+      <div className="bg-white h-[1px] opacity-15">.</div>
+      <div className="text-white container mx-auto py-16 ">
+        <h2 className="text-2xl font-extrabold mb-8 text-center">
+          Learn more about us
+        </h2>
+        <div className="flex justify-around">
+          
+          {/* <div className="space-y-2 flex flex-col justify-center items-center">
+            <blockquote
+              className="instagram-media"
+              data-instgrm-permalink="https://www.instagram.com/p/DYy2l7DH6U_/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ=="
+              data-instgrm-version="14"
+            ></blockquote>
+            <Script src="https://www.instagram.com/embed.js" strategy="lazyOnload" />
+            <p className="text-white font-bold text-xl">Our Social media</p>
+            <p className="text-white font-semibold text-lg">Your visit our Social media.</p>
+          </div> */}
+        
+          <div className="space-y-2 flex flex-col justify-center items-center ">
+            <div className="hidden sm:flex">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/B7nEK1rE8uQ?si=t4UDkLFn-kHpg_X7" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+            </div>
+            <div className="sm:hidden flex">
+            <iframe width="300" height="168" src="https://www.youtube.com/embed/B7nEK1rE8uQ?si=t4UDkLFn-kHpg_X7" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+            </div>
+            <p className="text-white font-bold text-xl">Our Social Media</p>
+            <p className="text-white font-semibold text-lg text-center">Your can visit our Social media via YouTube.</p>
+          </div>
+          {/* <div className="space-y-2 flex flex-col justify-center items-center">
+            <blockquote
+              className="instagram-media"
+              data-instgrm-permalink="https://www.instagram.com/p/DT-59LFk-FS/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+              data-instgrm-version="14"
+            ></blockquote>
+            <Script src="https://www.instagram.com/embed.js" strategy="lazyOnload" />
+            <p className="text-white font-bold text-xl">Our Social media</p>
+            <p className="text-white font-semibold text-lg">Your visit our Social media.</p>
+          </div> */}
+
+        </div>
+      </div>
+       <div className="bg-white h-[1px] opacity-15">.</div>
+
+    </>
   );
 }
