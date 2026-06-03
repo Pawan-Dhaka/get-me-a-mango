@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <div className=" flex justify-center flex-col gap-5 items-center text-white h-[40vh] ">
-        <div className="font-bold min-[500px]:text-5xl text-3xl flex items-center ">Buy me a Mango<span className="min-[500px]:w-20 w-12" ><img src="https://i.pinimg.com/originals/8e/cb/5b/8ecb5bda69e29eb348a04ad66077fac6.gif" alt="tea" /></span></div>
+        <div className="font-bold min-[500px]:text-5xl text-3xl flex items-center ">Buy me a Mango<span className="min-[500px]:w-20 w-12" ><img src="https://i.pinimg.com/originals/8e/cb/5b/8ecb5bda69e29eb348a04ad66077fac6.gif" alt="Mango" /></span></div>
         <p className='text-center px-2'>Get money to buy some Mongos by your followers and well wishers.</p>
         <div className="button flex gap-5">
           <Link href={"/login"}>
@@ -20,22 +20,22 @@ export default function Home() {
       <div className="bg-white h-[1px] opacity-15">.</div>
       <div className="text-white container mx-auto py-16 ">
         <h2 className="text-2xl font-extrabold mb-8 text-center">
-          Your fans can buy tea for you
+          Your fans can buy Mangos for you
         </h2>
         <div className="flex justify-around">
           <div className="space-y-2 flex flex-col justify-center items-center">
             <img className="w-[110px] item bg-slate-400 rounded-full p-2" src="/man.gif" alt="" />
             <p className="text-white font-bold text-xl text-center">Fund Yourself</p>
-            <p className="text-white font-semibold text-lg hidden lg:flex">Your fans are willing to help you.</p>
+            <p className="text-white font-semibold text-lg hidden lg:flex">Let your supporters fund your journey.</p>
           </div>
           <div className="space-y-2 flex flex-col justify-center items-center ">
             <img className="w-[110px] item bg-slate-400 rounded-full p-2" src="/coin.gif" alt="" />
-            <p className="text-white font-bold text-xl text-center">Fans want to help</p>
-            <p className="text-white font-semibold text-lg hidden lg:flex">Your fans are willing to help you.</p>
+            <p className="text-white font-bold text-xl text-center">Send a Mango</p>
+            <p className="text-white font-semibold text-lg hidden lg:flex">Receive small support from your fans.</p>
           </div>
           <div className="space-y-2  flex-col justify-center items-center hidden min-[500px]:flex">
             <img className="w-[110px] item bg-slate-400 rounded-full p-2" src="/group.gif" alt="" />
-            <p className="text-white font-bold text-xl text-center">Fans want to help</p>
+            <p className="text-white font-bold text-xl text-center">Community Support</p>
             <p className="text-white font-semibold text-lg hidden lg:flex">Your fans are willing to help you.</p>
           </div>
         </div>
@@ -47,16 +47,6 @@ export default function Home() {
         </h2>
         <div className="flex justify-around">
           
-          {/* <div className="space-y-2 flex flex-col justify-center items-center">
-            <blockquote
-              className="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DYy2l7DH6U_/?utm_source=ig_web_copy_link&igsh=NTc4MTIwNjQ2YQ=="
-              data-instgrm-version="14"
-            ></blockquote>
-            <Script src="https://www.instagram.com/embed.js" strategy="lazyOnload" />
-            <p className="text-white font-bold text-xl">Our Social media</p>
-            <p className="text-white font-semibold text-lg">Your visit our Social media.</p>
-          </div> */}
         
           <div className="space-y-2 flex flex-col justify-center items-center ">
             <div className="hidden sm:flex">
@@ -68,17 +58,7 @@ export default function Home() {
             <p className="text-white font-bold text-xl">Our Social Media</p>
             <p className="text-white font-semibold text-lg text-center">Your can visit our Social media via YouTube.</p>
           </div>
-          {/* <div className="space-y-2 flex flex-col justify-center items-center">
-            <blockquote
-              className="instagram-media"
-              data-instgrm-permalink="https://www.instagram.com/p/DT-59LFk-FS/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
-              data-instgrm-version="14"
-            ></blockquote>
-            <Script src="https://www.instagram.com/embed.js" strategy="lazyOnload" />
-            <p className="text-white font-bold text-xl">Our Social media</p>
-            <p className="text-white font-semibold text-lg">Your visit our Social media.</p>
-          </div> */}
-
+        
         </div>
       </div>
        <div className="bg-white h-[1px] opacity-15">.</div>
