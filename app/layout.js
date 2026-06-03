@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Home - Get me a Chai",
+  title: "Home - Get me a Mango",
   description: "This website is made by Pawan Dhaka",
 };
 
